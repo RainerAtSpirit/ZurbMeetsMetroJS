@@ -1,3 +1,4 @@
+@import "foundation/base";
 /* --------------------------------------------------
    Table of Contents
 -----------------------------------------------------
@@ -6,21 +7,42 @@
 :: Page Name 2
 */
 
+/* -----------------------------------------
+  Shared Styles
+----------------------------------------- */
+@include font-face("Open Sans Condensed", font-files("OpenSans-CondLight.woff", "OpenSans-CondLight.ttf", "OpenSans-CondLight.svg"), eot("OpenSans-CondLight.eot"), weight(normal), style(normal) );
+
+/*
+@include font-face("Open Sans Condensed", font-files( "OpenSans-CondBold.woff", "OpenSans-CondBold.ttf", "OpenSans-CondBold.svg", "OpenSans-CondBold.eot") );
+@include font-face("Open Sans Condensed", font-files("OpenSans-CondLightItalic.woff", "OpenSans-CondLightItalic.ttf", "OpenSans-CondLightItalic.svg", "OpenSans-CondLightItalic.eot") );
+*/
+
+
+$SegoeUILight: "Segoe UI Light", "Open Sans Condensed", Helvetica, sans-serif;
+
+.tile-title > .label {
+  display: inline-block;
+  float: right;
+}
+
+.micon {
+  padding: 5px;
+}
+
+.live-tile .subheader {
+  color: #dedede;
+}
+
+h1{
+  font-family: $SegoeUILight;
+/*  font-size: 42pt;*/
+}
 
 /* -----------------------------------------
-   Shared Styles
+  Page Name 1
 ----------------------------------------- */
 
-
-
 /* -----------------------------------------
-   Page Name 1
------------------------------------------ */
-
-
-
-
-/* -----------------------------------------
-   Page Name 2
+  Page Name 2
 ----------------------------------------- */
 

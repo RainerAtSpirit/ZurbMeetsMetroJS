@@ -6,11 +6,45 @@
 :: Page Name 2
 */
 /* -----------------------------------------
-   Shared Styles
+  Shared Styles
+----------------------------------------- */
+@font-face {
+  font-family: "Open Sans Condensed";
+  src: url('fonts/eot("OpenSans-CondLight.eot")');
+  src: url('fonts/eot("OpenSans-CondLight.eot")?#iefix') format('eot'), url('fonts/OpenSans-CondLight.woff') format('woff'), url('fonts/OpenSans-CondLight.ttf') format('truetype'), url('fonts/OpenSans-CondLight.svg') format('svg');
+  font-weight: weight(normal);
+  font-style: style(normal);
+}
+
+/*
+@include font-face("Open Sans Condensed", font-files( "OpenSans-CondBold.woff", "OpenSans-CondBold.ttf", "OpenSans-CondBold.svg", "OpenSans-CondBold.eot") );
+@include font-face("Open Sans Condensed", font-files("OpenSans-CondLightItalic.woff", "OpenSans-CondLightItalic.ttf", "OpenSans-CondLightItalic.svg", "OpenSans-CondLightItalic.eot") );
+*/
+/* line 23, ../sass/app.scss */
+.tile-title > .label {
+  display: inline-block;
+  float: right;
+}
+
+/* line 28, ../sass/app.scss */
+.micon {
+  padding: 5px;
+}
+
+/* line 32, ../sass/app.scss */
+.live-tile .subheader {
+  color: #dedede;
+}
+
+/* line 36, ../sass/app.scss */
+h1 {
+  font-family: "Segoe UI Light", "Open Sans Condensed", Helvetica, sans-serif;
+  /*  font-size: 42pt;*/
+}
+
+/* -----------------------------------------
+  Page Name 1
 ----------------------------------------- */
 /* -----------------------------------------
-   Page Name 1
------------------------------------------ */
-/* -----------------------------------------
-   Page Name 2
+  Page Name 2
 ----------------------------------------- */
