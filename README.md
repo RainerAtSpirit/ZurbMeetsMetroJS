@@ -21,4 +21,4 @@ unique view to OOTB SharePoint sites.
 [Zurb Foundation 3]: http://foundation.zurb.com/
 [MetroJS]: http://drewgreenwell.com/projects/metrojs
 [Free Metro Icons]: http://www.iconshock.com/windows8-icons/
-[Open Sans Condensed]: http://www.google.com/webfonts#ChoosePlace:select/Collection:Open+Sans|Open+Sans+Condensed:300
+[Open Sans Condensed]: http://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans+Condensed
