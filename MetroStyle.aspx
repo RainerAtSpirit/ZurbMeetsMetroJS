@@ -22,23 +22,28 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width"/>
 
-    <title>Welcome to Foundation</title>
+    <title>The SharePoint DVWP in Ferrari mode strikes again</title>
 
-    <!-- Included CSS Files -->
-    <link rel="stylesheet" href="stylesheets/foundation-style/globals.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/typography.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/grid.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/ui.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/buttons.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/tabs.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/navbar.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/forms.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/orbit.css" />
-    <link rel="stylesheet" href="stylesheets/foundation-style/reveal.css"/>
+    <!-- Included CSS metroJS -->
     <link rel="stylesheet" type="text/css" href="stylesheets/MetroJs.css"/>
+
+    <!-- Included CSS Files Development -->
+    <!--<link rel="stylesheet" href="stylesheets/foundation-style/globals.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/typography.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/grid.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/ui.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/buttons.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/tabs.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/navbar.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/forms.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/orbit.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/reveal.css"/>
     <link rel="stylesheet" href="stylesheets/app.css"/>
+-->
+    <!-- Included CSS Files Produktion -->
 
     <script src="javascripts/foundation/modernizr.foundation.js"></script>
+    <link rel="stylesheet" href="stylesheets/prod.css"/>
 
     <!-- IE Fix for HTML5 Tags -->
     <!--[if lt IE 9]>
@@ -58,9 +63,7 @@
     <div id="metroTiles" class="twelve columns tiles">
         <!-- DVWP with DataSourceMode="ListOfLists" -->
         <WebPartPages:DataFormWebPart runat="server" AsyncRefresh="False" FrameType="None" SuppressWebPartChrome="True">
-            <ParameterBindings>
-                <ParameterBinding Name="CreateLabel" Location="Resource(core,nav_Create)" DefaultValue="Create"/>
-            </ParameterBindings>
+            <ParameterBindings></ParameterBindings>
             <DataFields></DataFields>
             <XslLink>XSLT/ListsAsTiles.xslt</XslLink>
             <Xsl></Xsl>
@@ -92,17 +95,19 @@
         // NOTE: The default options for each liveTile are being pulled from the 'data-' attributes
         $(".live-tile, .flip-list").not(".exclude").liveTile();
 
-        //remove default theme and apply applicationBarTheme
-        $("body, .tiles").removeClass("dark").removeClass("blue");
+        // showing UTC date as prettyDate
         $('span.prettyDate').prettyDate();
-        $("#metroTiles").on("click", ".live-tile", function(event){
-            var message = "We could now redirect you to the default SharePoint view\n\nBut we won't ;-)\n\n";
-            var url = $(this).data('target');
 
-        	alert( message +  url);
+        // Showing default list/library URL on click
+        $("#metroTiles").on("click", ".live-tile", function (event) {
+            var message = "We could now redirect you to the default SharePoint view\n\nBut we won't ;-)\n\n",
+                    url = $(this).data('target');
+            alert(message + url);
         });
     });
 </script>
+
 <SharePoint:FormDigest ID="FormDigest1" runat="server"></SharePoint:FormDigest>
+
 </body>
 </html>

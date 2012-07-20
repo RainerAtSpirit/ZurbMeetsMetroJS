@@ -1,47 +1,54 @@
-﻿<xsl:stylesheet version="1.0"
-                exclude-result-prefixes="xsl ddwrt2 ddwrt msxsl"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:ddwrt2="urn:frontpage:internal"
+﻿<xsl:stylesheet version="1.0" exclude-result-prefixes="xsl ddwrt2 ddwrt msxsl"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ddwrt2="urn:frontpage:internal"
                 xmlns:ddwrt="http://schemas.microsoft.com/WebParts/v2/DataView/runtime"
-                xmlns:msxsl="urn:schemas-microsoft-com:xslt"
-        >
+                xmlns:msxsl="urn:schemas-microsoft-com:xslt">
     <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
-    <xsl:param name="CreateLabel"></xsl:param>
     <xsl:variable name="Rows"
                   select="/dsQueryResponse/Rows/Row[not(@__spHidden = 'True') and not(contains(@__spDefaultViewUrl, '_catalogs')) and @__spTitle != 'ServiceFiles']"/>
-    <!-- Could use and __spOnQuickLaunch="True" -->
-    <xsl:variable name="RowCount" select="count($Rows)"/>
-    <xsl:variable name="IsEmpty" select="$RowCount = 0"/>
 
-    <xsl:variable name="listCount">
+    <!-- configMap allows configuration per BaseTemplate -->
+    <xsl:variable name="configMap">
+        <global>
+            <maxTiles>12</maxTiles>
+            <wideTiles>5</wideTiles>
+        </global>
+        <tiles>
+            <item BaseTemplate="Contacts" color="lime" icon="images/48/bomb.png" />
+            <item BaseTemplate="DocumentLibrary" color="teal" icon="images/48/file.png" data-mode="slide"
+                                          data-direction="vertical"/>
+            <item BaseTemplate="GenericList" color="green" icon="images/48/inventory2.png" data-mode="flip"
+                                          data-direction="vertical"/>
+            <item BaseTemplate="Tasks" color="red" icon="images/48/bomb.png" data-mode="flip"
+                              data-direction="horizontal"/>
+            <item BaseTemplate="GanttTasks" color="purple" icon="images/48/hand_thumbsup.png"/>
+            <item BaseTemplate="IssueTracking" color="pink" icon="images/48/clipboard.png" data-mode="slide"
+                              data-direction="vertical"/>
+            <item BaseTemplate="Links" color="lime" icon="images/48/link.png"/>
+            <item BaseTemplate="WebPageLibrary" color="brown" icon="images/48/clipboard.png"/>
+            <item BaseTemplate="Events" color="mango" icon="images/48/clipboard.png"/>
+            <item BaseTemplate="unknown" color="blue" icon="images/48/smiley_sad.png"/>
+        </tiles>
+    </xsl:variable>
+
+    <!-- shortcuts to globalConfig and tilesConfig -->
+    <xsl:variable name="globalConfig" select="msxsl:node-set($configMap)/global"/>
+    <xsl:variable name="tilesConfig" select="msxsl:node-set($configMap)/tiles"/>
+
+    <!-- itemsInList sorted by @__spItemCount descending. Used to distinguish between normal and wide tiles  -->
+    <xsl:variable name="itemsInList">
         <xsl:for-each select="$Rows">
             <xsl:sort select="@__spItemCount" order="descending" data-type="number"/>
             <item id="{@__spID}" count="{@__spItemCount}" pos="{position()}"/>
         </xsl:for-each>
     </xsl:variable>
 
-
-    <xsl:variable name="configMap">
-        <item BaseTemplate="Contacts" color="lime" icon="images/48/bomb.png"/>
-        <item BaseTemplate="DocumentLibrary" color="teal" icon="images/48/file.png"/>
-        <item BaseTemplate="GenericList" color="green" icon="images/48/inventory2.png"/>
-        <item BaseTemplate="Tasks" color="red" icon="images/48/bomb.png"/>
-        <item BaseTemplate="GanttTasks" color="purple" icon="images/48/hand_thumbsup.png"/>
-        <item BaseTemplate="IssueTracking" color="pink" icon="images/48/clipboard.png"/>
-        <item BaseTemplate="Links" color="lime" icon="images/48/link.png"/>
-        <item BaseTemplate="WebPageLibrary" color="brown" icon="images/48/clipboard.png"/>
-        <item BaseTemplate="Events" color="mango" icon="images/48/clipboard.png"/>
-    </xsl:variable>
-
     <xsl:template match="/">
-
         <xsl:for-each select="$Rows">
+            <!-- This complex sort criteria is required because __spModified is localized. Using information inside __spPropertiesXml instead -->
             <xsl:sort
                     select="translate(substring-before(substring-after(@__spPropertiesXml, 'Modified=&quot;'), '&quot; LastDeleted'), ' :', '')"
                     order="descending" data-type="number"/>
-            <!--<xsl:sort select="@__spItemCount" order="descending" data-type="number" />-->
-
-            <xsl:if test="position() &lt; 13">
+            <xsl:if test="position() &lt;= $globalConfig/maxTiles">
                 <xsl:call-template name="Tile"/>
             </xsl:if>
         </xsl:for-each>
@@ -50,47 +57,25 @@
     <xsl:template name="Tile">
         <xsl:variable name="baseTemplate" select="@__spBaseTemplate"/>
         <xsl:variable name="spID" select="@__spID"/>
-        <xsl:variable name="color">
-            <xsl:choose>
-                <xsl:when test="msxsl:node-set($configMap)/item[@BaseTemplate = $baseTemplate]">
-                    <xsl:value-of select="msxsl:node-set($configMap)/item[@BaseTemplate = $baseTemplate]/@color"/>
-                </xsl:when>
-                <xsl:otherwise>blue</xsl:otherwise>
-            </xsl:choose>
+        <!-- Mashup of $configMap and $ itemsInList for the current item -->
+        <xsl:variable name="coreMetaData">
+            <xsl:call-template name="MetaData">
+                <xsl:with-param name="baseTemplate" select="$baseTemplate"/>
+                <xsl:with-param name="spID" select="$spID"/>
+            </xsl:call-template>
         </xsl:variable>
-        <xsl:variable name="icon">
-            <xsl:choose>
-                <xsl:when test="msxsl:node-set($configMap)/item[@BaseTemplate = $baseTemplate]">
-                    <xsl:value-of select="msxsl:node-set($configMap)/item[@BaseTemplate = $baseTemplate]/@icon"/>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="@__spImageUrl"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-
-        <xsl:variable name="size">
-            <xsl:choose>
-                <xsl:when test="msxsl:node-set($listCount)/item[@id = $spID]/@pos &lt; 4">
-                    <xsl:text>wide</xsl:text>
-                </xsl:when>
-                <xsl:otherwise></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+        <!-- shortcut for accessing $coreMetaData -->
+        <xsl:variable name="t" select="msxsl:node-set($coreMetaData)"/>
 
         <xsl:variable name="DateRaw"
                       select="translate(substring-before(substring-after(@__spPropertiesXml, 'Modified=&quot;'), '&quot; LastDeleted'), ' ', 'T')"/>
         <xsl:variable name="PrettyDateUTC"
                       select="concat(substring($DateRaw, 1, 4), '-', substring($DateRaw, 5, 2), '-', substring($DateRaw, 7,2), substring($DateRaw, 9), 'Z')"/>
 
-        <xsl:variable name="mode">
-            <xsl:choose>
-                <xsl:when test="$size = 'wide'">slide</xsl:when>
-                <xsl:otherwise>flip</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-
-        <div id="{concat('tile-', position())}" class="live-tile {$color} {$size}" data-mode="{$mode}" data-stops="100%"
-             data-speed="750"
-             data-delay="-1"  data-target="{@__spDefaultViewUrl}" data-baseTemplate="{@__spBaseTemplate}">
+        <div class="live-tile {$t/item/@color} {$t/size}" data-mode="{$t/item/@data-mode}" data-stops="100%"
+             data-speed="750" data-direction="{$t/item/@data-direction}"
+             data-delay="-1"
+             data-target="{@__spDefaultViewUrl}" data-baseTemplate="{@__spBaseTemplate}">
             <span class="tile-title">
                 <xsl:value-of select="@__spTitle"/>
                 <span class="badge right">
@@ -98,7 +83,7 @@
                 </span>
             </span>
             <div>
-                <img src="{$icon}" class="micon"/>
+                <img src="{$t/item/@icon}" class="micon"/>
             </div>
             <div>
                 <h3>
@@ -111,4 +96,26 @@
         </div>
     </xsl:template>
 
+    <xsl:template name="MetaData">
+        <xsl:param name="spID"/>
+        <xsl:param name="baseTemplate"/>
+        <!-- accessible via $t/item/@XXXX. Available attributes see $configMap/tiles/item/@XXXX -->
+        <xsl:choose>
+            <xsl:when test="$tilesConfig/item[@BaseTemplate = $baseTemplate]">
+                <xsl:copy-of select="$tilesConfig/item[@BaseTemplate = $baseTemplate]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="$tilesConfig/item[@BaseTemplate = 'unknown']"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <!-- accessible via $t/size -->
+        <size>
+            <xsl:choose>
+                <xsl:when test="msxsl:node-set($itemsInList)/item[@id = $spID]/@pos &lt;= $globalConfig/wideTiles">
+                    <xsl:text>wide</xsl:text>
+                </xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>
+        </size>
+    </xsl:template>
 </xsl:stylesheet>
