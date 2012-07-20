@@ -24,8 +24,18 @@
     <!-- Included metroJS CSS  -->
     <link rel="stylesheet" type="text/css" href="stylesheets/MetroJs.css"/>
 
-    <!-- Included CSS Files Production -->
-    <link rel="stylesheet" href="stylesheets/prod.css"/>
+    <!-- Included CSS Files Development -->
+    <link rel="stylesheet" href="stylesheets/foundation-style/globals.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/typography.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/grid.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/ui.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/buttons.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/tabs.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/navbar.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/forms.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/orbit.css"/>
+    <link rel="stylesheet" href="stylesheets/foundation-style/reveal.css"/>
+    <link rel="stylesheet" href="stylesheets/app.css"/>
 
     <script src="javascripts/modernizr.foundation.js"></script>
     <!-- IE Fix for HTML5 Tags -->
@@ -59,12 +69,19 @@
     </div>
 </div>
 
-<!-- Production JS files -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+<!-- OOTB Zurb foundation JS files that are not required for this demo -->
+<script src="javascripts/foundation/jquery.reveal.js"></script>
+<script src="javascripts/foundation/jquery.orbit-1.4.0.js"></script>
+<script src="javascripts/foundation/jquery.customforms.js"></script>
+<script src="javascripts/foundation/jquery.placeholder.min.js"></script>
+<script src="javascripts/foundation/jquery.tooltips.js"></script>
+<script src="javascripts/app.js"></script>
 <script type="text/javascript" src="javascripts/app/MetroJs.js"></script>
 <script type="text/javascript" src="javascripts/app/jquery.prettyDate.js"></script>
 
-<!-- Inline script for easier readability in HTML source mode -->
+<!-- Inline script for demo  purposes only! -->
 <script type="text/javascript">
     $(document).ready(function () {
         var doBind = (typeof (window.bindAppBarKeyboard) == "undefined" || window.bindAppBarKeyboard);
@@ -84,6 +101,8 @@
         });
     });
 </script>
+
 <SharePoint:FormDigest ID="FormDigest1" runat="server"></SharePoint:FormDigest>
+
 </body>
 </html>
