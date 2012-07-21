@@ -5,7 +5,7 @@ DVWP running on SharePoint 2007/2010 (maybe 2013) to produce a Metro like start 
 A [Live Preview] is available a blog post is in the pipeline.
 
 This examples combines several state of the art web technologies with the good old SharePoint DVWP to provide a
-unique view to OOTB SharePoint sites.
+unique view for OOTB SharePoint sites.
 
 ###Technologies:
 1. Accessing SharePoint data: [DVWP in ferrari mode]
