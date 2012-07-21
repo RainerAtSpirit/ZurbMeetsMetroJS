@@ -1,4 +1,4 @@
-﻿<xsl:stylesheet version="1.0" exclude-result-prefixes="xsl ddwrt2 ddwrt msxsl"
+﻿<xsl:stylesheet version="1.0" exclude-result-prefixes="xsl ddwrt msxsl"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ddwrt2="urn:frontpage:internal"
                 xmlns:ddwrt="http://schemas.microsoft.com/WebParts/v2/DataView/runtime"
                 xmlns:msxsl="urn:schemas-microsoft-com:xslt">

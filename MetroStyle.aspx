@@ -39,9 +39,9 @@
 <div class="row">
     <div class="twelve columns">
         <h1>The SharePoint DVWP in Ferrari mode strikes again</h1>
-        <p>Live demo for an upcoming blog post at <a
+        <p>Background information available at: <a
                 href="http://rainerat.spirit.de/2012/07/20/the-sharepoint-dvwp-in-ferrari-mode-strikes-again/">
-            Rainer at Spirit</a></p>
+            RainerAtSpirit's blog</a></p>
         <hr/>
     </div>
     <div id="metroTiles" class="twelve columns tiles">
