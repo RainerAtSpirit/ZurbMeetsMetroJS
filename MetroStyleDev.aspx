@@ -50,8 +50,13 @@
     <div class="twelve columns">
         <h1>The SharePoint DVWP in Ferrari mode strikes again</h1>
 
-        <p>Live demo for an upcoming blog post at <a href="http://rainerat.spirit.de">http://rainerat.spirit.de</a></p>
+        <p>Live demo for an upcoming blog post at <a
+                        href="http://rainerat.spirit.de/2012/07/20/the-sharepoint-dvwp-in-ferrari-mode-strikes-again/">
+                    Rainer at Spirit</a><br />
+            <code>Development version with individual CSS and JS files</code>
+        </p>
         <hr/>
+
     </div>
     <div id="metroTiles" class="twelve columns tiles">
         <!-- DVWP with DataSourceMode="ListOfLists" -->
