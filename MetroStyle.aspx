@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="stylesheets/prod.css"/>
 
     <script src="javascripts/modernizr.foundation.js"></script>
+    <script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-31072569-1']);
+	  _gaq.push(['_trackPageview']);
+	</script>
     <!-- IE Fix for HTML5 Tags -->
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -39,9 +44,12 @@
 <div class="row">
     <div class="twelve columns">
         <h1>The SharePoint DVWP in Ferrari mode strikes again</h1>
-        <p>Background information available at: <a
+        <h2 class="subheader">Running on premise on SP2010 foundation</h2>
+        <p>More info <a
                 href="http://rainerat.spirit.de/2012/07/20/the-sharepoint-dvwp-in-ferrari-mode-strikes-again/">
-            RainerAtSpirit's blog</a></p>
+            RainerAtSpirit's blog</a>. The same version is running hosted on <a
+                href="https://spirit2013preview-public.sharepoint.com/zurb/MetroStyle.aspx">SP2013
+            Preview</a></p>
         <hr/>
     </div>
     <div id="metroTiles" class="twelve columns tiles">
@@ -75,7 +83,7 @@
         $(".live-tile, .flip-list").not(".exclude").liveTile();
 
         // showing UTC date as prettyDate
-        $('span.prettyDate').prettyDate();
+        $('span.prettyDate').prettyDate({ isUTC: true });
 
         // Showing default list/library URL on click
         $("#metroTiles").on("click", ".live-tile", function (event) {
@@ -86,5 +94,12 @@
     });
 </script>
 <SharePoint:FormDigest ID="FormDigest1" runat="server"></SharePoint:FormDigest>
+<script type="text/javascript">
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
 </body>
 </html>
