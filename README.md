@@ -27,6 +27,5 @@ unique view for OOTB SharePoint sites.
 [Free Metro Icons]: http://www.iconshock.com/windows8-icons/
 [Open Sans Condensed]: http://www.google.com/webfonts#UsePlace:use/Collection:Open+Sans+Condensed
 
-[SharePoint DVWP: from workhorse to ferrari in 7 steps]: http://rainerat.spirit
-.de/2012/07/15/sharepoint-dvwp-from-workhorse-to-ferrari-in-7-steps/
+[SharePoint DVWP: from workhorse to ferrari in 7 steps]: http://rainerat.spirit.de/2012/07/15/sharepoint-dvwp-from-workhorse-to-ferrari-in-7-steps/
 [The SharePoint DVWP in Ferrari mode strikes again]: http://rainerat.spirit.de/2012/07/20/the-sharepoint-dvwp-in-ferrari-mode-strikes-again/
