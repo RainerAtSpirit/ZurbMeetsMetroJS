@@ -1,5 +1,5 @@
 # Zurb Foundation 3.0 and MetroJS
-## Using the SharePoint DVWP in Ferrari mode
+## Using the SharePoint DVWP in Ferrari mode Part 2
 
 DVWP running on SharePoint 2007/2010 and 2013 to produce a Metro like start screen for a site.
 [Live Preview SP2010] and [Live Preview SP2013] are available and there are two blog posts that cover the setup:
